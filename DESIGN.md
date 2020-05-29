@@ -13,6 +13,7 @@ sudoku puzzle with a unique solution.
 
 The C-sarSudoku program uses command-line interface. It takes one argument
 
+
 ```console
 ./sudoku mode
 ```
