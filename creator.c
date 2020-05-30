@@ -10,13 +10,14 @@
 
 int fill_grid(int *grid, int field, int size);
 bool check_consistency(int *grid, int field, int value);
-int get_random();
+int get_random(int min, int max);
+void remove_fields(int *grid, int n);
 
 void creator(int *grid, int size) {
 	//if(size == 81)    do we want to do this? should we even pass size or just assume its 81?
 	//  I don't think this hurts -blake
 	fill_grid(grid, 0, size);
-	//remove_fields(grid);
+	//remove_fields(grid, n);
 
 }
 
@@ -24,7 +25,7 @@ void creator(int *grid, int size) {
 int fill_grid(int *grid, int field, int size) {
         if(field >= size)
                 return 0;
-        int start = get_random();
+        int start = get_random(1, 9);
         int value = start;
         //find value that works
         while(true) {
@@ -75,8 +76,37 @@ bool check_consistency(int *grid, int field, int value) {
         return true;
 }
 
-int get_random() {
+int get_random(int min, int max) {
         srand(time(0));
-	return (rand()%9)+1;
+	return (rand()%(max-min+1))+min;
 }
 
+//this does not work yet lol just some thoughts
+/*
+//removes n fields from completed grid such that it has a unique solution
+void remove_fields(int *grid, int n) {
+	remove_helper(grid, get_random(0, 80), 0, 40);
+}
+
+int remove_helper(int *grid, int field, int removed, int goal) {
+	if(removed >= goal) {
+		return 0;
+	}
+	int value = *(grid+field);
+	//check if already removed
+	if(value == 0) {
+		remove_helper(grid, get_random(0, 80), removed, goal);
+	}
+	else {
+		*(grid+field) = 0;
+		if(solver(grid, 81)) {
+			while(remove_helper(grid, get_random(0, 80), removed+1, goal) == 0) {
+				return 0;
+			}
+			else {
+				
+			}
+		}
+	}
+}
+*/

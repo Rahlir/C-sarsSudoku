@@ -16,6 +16,6 @@ int fill_grid(int *grid, int field, int size);
 //returns true and inserts value into grid if value in field in grid is legal, false otherwise
 bool check_consistency(int *grid, int field, int value);
 
-//returns random int 1-9
-int get_random();
+//returns random int min-max inclusive
+int get_random(int min, int max);
 
