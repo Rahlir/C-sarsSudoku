@@ -18,8 +18,10 @@ int main()
         *(grid+i) = 0;
     }
 
-    printf("%d\n", checker_consistency(grid, 0, 0));
-    printf("%d\n", checker_consistency(grid, 0, 1));
+    printf("%d\n", check_consistent(grid, 45, 0));
+    printf("%d\n", check_consistent(grid, 21, 1));
+    printf("%d\n", check_consistent(grid, 45, 0));
+    printf("%d\n", true);
 
 
     return 0;
