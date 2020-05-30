@@ -15,7 +15,16 @@
 #include<stdbool.h>
 
 
-bool check_row(int *grid, int index, int test_value);
+//////////////////// check_consistency ////////////////////
+/*  returns true if value in field in grid is legal, false otherwise
+ *
+ *  input a grid pointer, a field index, and a test value
+ *
+ *  assumes the grid has 81 slots and that the field is between 0 and 80
+ *  assumes that value is from 1-9
+ */
+bool check_consistency(int *grid, int field, int value);
+
 
 
 

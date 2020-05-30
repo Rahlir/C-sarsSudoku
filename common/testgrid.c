@@ -18,7 +18,7 @@ int main()
         grid[i] = 0;
     }
 
-    printf("%d\n", check_row(grid, 0, 0));
+    printf("%d\n", check_consistency(grid, 0, 0));
 
 
     return 0;

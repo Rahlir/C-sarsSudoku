@@ -13,68 +13,34 @@
 #include<stdbool.h>
 #include "check.h"
 
+//////////////////// check_consistency ////////////////////
+//returns true if value in field in grid is legal, false otherwise
+bool check_consistency(int *grid, int field, int value) {
+	int row = field/9;	//rows 0-8
+	int col = field%9;	//cols 0-8
+	int box_corner =(((int)(row/3))*27) + (((int)(col/3))*3);
+	//check row
+	for(int i=(row*9); i<row+9; i++) {
+		if((i != field) && (*(grid+i) == value))
+			return false;
+	}
+	//check col
+	for(int i=col; i<(col+73); i+=9) {
+		if((i != field) && (*(grid+i) == value))
+                        return false;
+	}
+	//check box
+	for(int i=0; i<3; i++) {
+		for(int j=0; j<3; j++) {
+			int check = (box_corner+i)+(j*9);
+			if((check != field) && (*(grid+check) == value))
+                        	return false;
+		}
+	}
 
-
-
-//////////////////// local_functions ////////////////////
-bool check_row(int *grid, int index, int test_value);
-bool check_column(int *grid, int index, int test_value);
-bool check_square(int *grid, int index, int test_value);
-
-
-
-//////////////////// notes ////////////////////
-// 81 grid spaces, indeces 0-80
-// find row by integer dividing by 9
-// find column by modding by 9
-
-//////////////////// check_row ////////////////////
-/*  Given a grid, an index (location in the grid), and a value,
- *      checks if the value works in the row
- */
-bool check_row(int *grid, int index, int test_value)
-{
-    return true;
+	return true;
 }
 
-//////////////////// check_column ////////////////////
-/*  Given a grid, an index (location in the grid), and a value,
- *      checks if the value works in the row
- */
-bool check_column(int *grid, int index, int test_value)
-{
-    return true;
-}
-
-//////////////////// check_square ////////////////////
-/*  Given a grid, an index (location in the grid), and a value,
- *      checks if the value works in the row
- */
-bool check_square(int *grid, int index, int test_value)
-{
-    return true;
-}
-
-
-
-//////////////////// check ////////////////////
-/*  Given a grid, an index (location in the grid), and a value
- *      checks if the value works in the given space
- *
- */
-bool check(int *grid, int index, int test_value)
-{
-    if (!check_row(grid, index test_value))
-        return false;
-
-    if (!check_column(grid, index test_value))
-        return false;
-
-    if (!check_square(grid, index test_value))
-        return false;
-
-    return true;
-}
 
 
 
