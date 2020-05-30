@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "creator.h"
 
 void print_grid(int *grid, int size);
 bool process_input(int *grid, int size);
@@ -42,7 +43,7 @@ int main(int argc, char *argv[]) {
 		//get puzzle to be solved
 		if(process_input(grid, size)) {
 			//initialize solver
-			solver(grid, size);
+			//solver(grid, size);
 		}
 		else {
 			printf("Error: invalid input\n");
@@ -93,3 +94,5 @@ void print_grid(int *grid, int size) {
 		}
 	}
 }
+
+

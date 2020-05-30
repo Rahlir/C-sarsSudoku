@@ -6,12 +6,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
+
+int fill_grid(int *grid, int field, int size);
+bool check_consistency(int *grid, int field, int value);
+int get_random();
 
 void creator(int *grid, int size) {
 	//if(size == 81)    do we want to do this? should we even pass size or just assume its 81?
 	//  I don't think this hurts -blake
 	fill_grid(grid, 0, size);
-	remove_fields(grid);
+	//remove_fields(grid);
 
 }
 
@@ -71,6 +76,7 @@ bool check_consistency(int *grid, int field, int value) {
 }
 
 int get_random() {
-        return 1;
+        srand(time(0));
+	return (rand()%9)+1;
 }
 
