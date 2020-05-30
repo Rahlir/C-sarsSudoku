@@ -15,7 +15,7 @@
 
 //////////////////// check_consistency ////////////////////
 //returns true if value in field in grid is legal, false otherwise
-bool check_consistency(int *grid, int field, int value) {
+bool checker_consistency(int *grid, int field, int value) {
 	int row = field/9;	//rows 0-8
 	int col = field%9;	//cols 0-8
 	int box_corner =(((int)(row/3))*27) + (((int)(col/3))*3);
