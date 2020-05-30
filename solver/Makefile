@@ -36,3 +36,4 @@ clean:
 	rm -f *core.*
 	rm -f $(PROG)
 	rm -f *.dSYM
+	$(MAKE) -C $C clean
