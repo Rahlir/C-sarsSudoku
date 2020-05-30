@@ -6,31 +6,24 @@
 
 CC = gcc
 CFLAGS = -Wall -pedantic -std=c11 -ggdb
-LIBS = 
-PROG = testgrid
-OBJS = testgrid.o check.o
+OBJS = check.o
 MAKE = make
+LIB = common.a
 
+# Build the library by archiving object files
+$(LIB): $(OBJS)
+	ar cr $(LIB) $^
 
-$(PROG): $(OBJS)
-	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
-
-
-test.o: check.h
-
+# Dependencies: object files depend on header files
 check.o: check.h
 
-all: $(PROG)
+.PHONY: all clean
 
-.PHONY: all clean test valgrind
-
-test: $(PROG)
-	# ./testing.sh 2>&1 | tee testing.out
-
+all: $(LIB) check.o
 
 clean:
 	rm -f *~ *.o
 	rm -f core
 	rm -f *core.*
-	rm -f $(PROG)
+	rm -f $(LIB)
 	rm -f *.dSYM
