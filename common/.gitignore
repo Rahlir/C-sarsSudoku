@@ -1,0 +1,11 @@
+# ignore these files
+testgrid*
+Makefile
+
+# ignore object files
+*.o
+
+# ignore core files
+
+core
+*core.*
