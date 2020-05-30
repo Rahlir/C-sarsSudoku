@@ -23,7 +23,7 @@
  *  assumes the grid has 81 slots and that the field is between 0 and 80
  *  assumes that value is from 1-9
  */
-bool checker_consistency(int *grid, int field, int value);
+bool check_consistent(int *grid, int field, int value);
 
 
 

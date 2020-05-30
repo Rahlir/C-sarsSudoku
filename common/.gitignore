@@ -1,5 +1,6 @@
 # ignore these files
-testgrid
+testgrid*
+Makefile
 
 # ignore object files
 *.o
