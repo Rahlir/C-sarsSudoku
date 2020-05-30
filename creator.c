@@ -9,6 +9,7 @@
 
 void creator(int *grid, int size) {
 	//if(size == 81)    do we want to do this? should we even pass size or just assume its 81?
+	//  I don't think this hurts -blake
 	fill_grid(grid, 0, size);
 	remove_fields(grid);
 
