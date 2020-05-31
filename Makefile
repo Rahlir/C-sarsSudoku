@@ -15,10 +15,6 @@ CFLAGS = -Wall -pedantic -std=c11 -ggdb -I$(CO) -I$(CR) -I$(SO)
 CLIBS = $(CO)/common.a
 MAKE = make
 
-# ############## default: make all libs and programs ##############
-# all: $(PROG)
-# 	$(MAKE) -C $(CO)
-
 
 ############## make main program ##############
 
@@ -32,7 +28,7 @@ common/check.o: $(CO)/check.h
 common/common.a: $(CO)/check.h
 	$(MAKE) -C $(CO)
 
-#creator/creator.o: $(CR)/creator.h $(CO)/check.h
+creator/creator.o: $(CR)/creator.h $(CO)/check.h
 
 solver/solver.o: $(SO)/solver.h $(CO)/check.h
 
@@ -48,5 +44,5 @@ clean:
 	rm -f $(PROG)
 	rm -f *.dSYM
 	$(MAKE) -C $(CO) clean
-	#$(MAKE) -C $(CR) clean
+	$(MAKE) -C $(CR) clean
 	$(MAKE) -C $(SO) clean
