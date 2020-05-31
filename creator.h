@@ -13,9 +13,6 @@ void creator(int *grid, int size);
 //recursively fills valid sudoku grid, returns 1 on success and 0 on failure
 int fill_grid(int *grid, int field, int size);
 
-//returns true and inserts value into grid if value in field in grid is legal, false otherwise
-bool check_consistency(int *grid, int field, int value);
-
 //returns random int min-max inclusive
 int get_random(int min, int max);
 
