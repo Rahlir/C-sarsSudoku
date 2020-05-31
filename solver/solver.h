@@ -22,7 +22,6 @@
  *
  * takes as arguments:
  *		a pointer to an integer array representing the grid being solved
- *		a pointer to an empty integer where the solution will be saved
  *		the size of the grids
  * returns:
  *		0 if found only one solution
@@ -30,9 +29,13 @@
  *		2 if found no solutions
  *		3 if invalid grid size
  *
- * Assumes that grid inputs are the same size
  * The solver only runs if size is 81
  */
-int solve(int *grid, int *soln, int size);
+int solver(int *grid, int size);
 
 #endif
+
+
+/// removed comments about soln parameter
+// Assumes that grid inputs are the same size
+// a pointer to an empty integer where the solution will be saved

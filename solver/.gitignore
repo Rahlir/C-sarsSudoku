@@ -11,3 +11,4 @@ core
 *core.*
 
 # ignore tests
+test*

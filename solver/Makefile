@@ -7,28 +7,26 @@
 CC = gcc
 C = ../common
 PROG = solvetest
-OBJS = solvetest.o solver.o $C/check.o $C/common.a
+OBJS = solvetest.o solver.o $C/check.o
 CFLAGS = -Wall -pedantic -std=c11 -ggdb -I$C
-CLIBS = $C/common.a
 MAKE = make
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) $^ $(CLIBS) -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 
 # Dependencies: object files depend on header files
 solvetest.o: solvetest.c
 
-solver.o: solver.h
+solver.o: solver.h $C/check.h
 
 ../common/check.o: $C/check.h
 
-../common/common.a: $C/check.h
-	$(MAKE) -C $C
+
 
 .PHONY: all clean
 
-all: $(PROG) 
+all: $(PROG)
 
 clean:
 	rm -f *~ *.o
@@ -36,4 +34,3 @@ clean:
 	rm -f *core.*
 	rm -f $(PROG)
 	rm -f *.dSYM
-	$(MAKE) -C $C clean

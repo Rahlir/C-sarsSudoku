@@ -34,24 +34,34 @@ int grid_copy(int *from, int *to, int size)
 // brute-force solves the puzzle, uses solve_helper to help with recursion
 // 
 // returns true if it's the only solution, false if more than one solution
-int solve(int *grid, int *soln, int size)
+int solver(int *grid, int size)
 {
     if (size != 81) {
         return 3;   // invalid grid size
     }
 
-	// sets the first number in the array to 0
-	// 	to signal that it does not yet contain a soltion
+	//	creates a solutions array and sets the first number in the array to 0
+	//		to signal that it does not yet contain a soltion
+	int *soln = malloc(size * sizeof(int));
 	*soln = 0;
 
 	if (solve_helper(grid, soln, size, 0) == 0) { // checked all numbers
-		if (*(soln) == 0)	// empty solution grid means no solutions
+		if (*(soln) == 0) {	// empty solution grid means no solutions
+			grid_copy(soln, grid, size);
+			free(soln);
 			return 2;
-		else	// non-empty solution grid means one solution
+		}
+		else {	// non-empty solution grid means one solution
+			grid_copy(soln, grid, size);
+			free(soln);
 			return 0;
+		}
 	}
-	else	// if return code is not 0, found second solution
-			return 1;
+	else {	// if return code is not 0, found second solution
+		grid_copy(soln, grid, size);
+		free(soln);
+		return 1;
+	}
 }
 
 
@@ -71,9 +81,10 @@ int solve_helper(int *grid, int *soln, int size, int field)
 		}
     }
     int i = field;
-    while (*(grid+i) != 0) { // increment until i is at a 0 in the grid
+    while ((*(grid+i) != 0) && (i + 1 < size)) { // increment until i is at a 0 in the grid
         i++;
     }
+
     // check all numbers
     for (int j = 1; j < 10; j++) { // try all numbers 1-9
         if (check_consistent(grid, i, j)) {   // if number works, insert value and recurse deeper

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "solver.h"
 
 void print_grid(int *grid, int size);
 bool process_input(int *grid, int size);
@@ -35,7 +36,7 @@ int main(int argc, char *argv[]) {
 		for(int i=0; i<size; i++)
 			*(grid+i) = 0;
 		//initialize creator
-		creator(grid, size);
+		//creator(grid, size);
 	}
 	//solve mode
 	else if(strcmp(mode, "solve") == 0) {

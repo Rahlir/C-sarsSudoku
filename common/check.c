@@ -41,6 +41,22 @@ bool check_consistent(int *grid, int field, int value) {
 	return true;
 }
 
+//////////////////// check_valid ////////////////////
+/*	checks if each nonzero value in grid is valid
+ *	returns true if grid is legal, false otherwise
+ */
+bool check_valid(int *grid)
+{
+	for (int i = 0; i < 81; i++) {	// for each cell
+		if (*(grid+i) != 0) {	// if it's nonzero
+			// check if the current value is consistent
+			if (!check_consistent(grid, i, *(grid+i)))
+				return false;
+		}
+	}
+	return true;
+}
+
 
 
 
