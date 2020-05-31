@@ -9,3 +9,5 @@ grid*
 # ignore core files
 core
 *core.*
+
+# ignore tests

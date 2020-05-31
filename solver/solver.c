@@ -30,31 +30,28 @@ int grid_copy(int *from, int *to, int size)
 	return 0;
 }
 
-//////////////////// solve_now ////////////////////
+//////////////////// solve ////////////////////
 // brute-force solves the puzzle, uses solve_helper to help with recursion
 // 
 // returns true if it's the only solution, false if more than one solution
-int solve_now(int *grid, int *soln, int size)
+int solve(int *grid, int *soln, int size)
 {
     if (size != 81) {
-        return 1;   // invalid grid size
+        return 3;   // invalid grid size
     }
 
-    
+	// sets the first number in the array to 0
+	// 	to signal that it does not yet contain a soltion
+	*soln = 0;
+
 	if (solve_helper(grid, soln, size, 0) == 0) { // checked all numbers
-		if (*(soln) == 0) { // empty solution grid means no solutions
-		printf("No solutions found\n");
-			return 0;
-		}
-		else { // non-empty solution grid means one solution
-			printf("One solution found\n");
-			return 1;
-		}
-	}
-	else { // if return code is not 0, found second solution
-		printf("Multiple solutions found\n");
+		if (*(soln) == 0)	// empty solution grid means no solutions
 			return 2;
+		else	// non-empty solution grid means one solution
+			return 0;
 	}
+	else	// if return code is not 0, found second solution
+			return 1;
 }
 
 
@@ -72,29 +69,20 @@ int solve_helper(int *grid, int *soln, int size, int field)
 			// keep first solution but signal found second solution and end recursion
 			return 2;
 		}
-        
     }
-
     int i = field;
     while (*(grid+i) != 0) { // increment until i is at a 0 in the grid
         i++;
     }
-
-
     // check all numbers
     for (int j = 1; j < 10; j++) { // try all numbers 1-9
-		//printf("field: %d	try: %d\n", i, j);
-
-
         if (check_consistent(grid, i, j)) {   // if number works, insert value and recurse deeper
-			//printf("works!\n");
 			*(grid+i) = j;
 			if (solve_helper(grid, soln, size, i+1) == 2) {
 				// if found second solution, 2 is returned
 				// break out of recursion
 				return 2;
 			}
-			//printf("back!\n");
         }
     }
     // have typed in all 9 numbers
