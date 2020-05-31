@@ -34,8 +34,3 @@
 int solver(int *grid, int size);
 
 #endif
-
-
-/// removed comments about soln parameter
-// Assumes that grid inputs are the same size
-// a pointer to an empty integer where the solution will be saved
