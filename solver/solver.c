@@ -36,10 +36,6 @@ int grid_copy(int *from, int *to, int size)
 // returns true if it's the only solution, false if more than one solution
 int solver(int *grid, int size)
 {
-    if (size != 81) {
-        return 3;   // invalid grid size
-    }
-
 	//	creates a solutions array and sets the first number in the array to 0
 	//		to signal that it does not yet contain a soltion
 	int *soln = malloc(size * sizeof(int));
