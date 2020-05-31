@@ -1,0 +1,12 @@
+# ignore these files
+sudoku
+
+# ignore object files
+*.o
+
+# ignore core files
+core
+*core.*
+
+# ignore tests
+test*

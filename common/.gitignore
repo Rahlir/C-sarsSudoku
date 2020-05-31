@@ -1,0 +1,9 @@
+# ignore object files
+*.o
+
+# ignore library files
+*.a
+
+# ignore core files
+core
+*core.*

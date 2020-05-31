@@ -1,0 +1,14 @@
+# ignore these files
+solvetest*
+grid*
+
+# ignore object files
+*.o
+*.a
+
+# ignore core files
+core
+*core.*
+
+# ignore tests
+test*
