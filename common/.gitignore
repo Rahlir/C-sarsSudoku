@@ -1,7 +1,6 @@
 # ignore these files
 testgrid*
 
-
 # ignore object files
 *.o
 *.a
