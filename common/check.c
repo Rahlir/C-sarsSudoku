@@ -20,7 +20,7 @@ bool check_consistent(int *grid, int field, int value) {
 	int col = field%9;	//cols 0-8
 	int box_corner =(((int)(row/3))*27) + (((int)(col/3))*3);
 	//check row
-	for(int i=(row*9); i<row+9; i++) {
+	for(int i=(row*9); i<((row*9) + 9); i++) {
 		if((i != field) && (*(grid+i) == value))
 			return false;
 	}
