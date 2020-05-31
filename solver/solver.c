@@ -29,8 +29,6 @@ int solve_now(int *grid, int size)
     int i = 0;
 
     solve_helper(grid, size, i);
-
-    }
     
 
     return 0;
@@ -50,7 +48,7 @@ bool solve_helper(int *grid, int size, int field)
     for (int j = 1; j < 10; j++) { // try all numbers 1-9
 
         if (check_consistent(grid, i, j)) {   // if number works, insert value and recurse deeper
-                *(grid+i) = j
+                *(grid+i) = j;
                 solve_helper(grid, size, i+i);
         }
     }
