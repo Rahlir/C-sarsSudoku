@@ -1,4 +1,4 @@
-# Makefile for 'solver' module for C-SarSudoku
+# Makefile for 'solvetest' file for C-SarSudoku
 # 
 # Blake Danziger, Tracey Mills, Tadeas Uhlir
 # CS 50, Spring 2020
