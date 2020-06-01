@@ -15,4 +15,3 @@ int fill_grid(int *grid, int field, int size);
 
 //returns random int min-max inclusive
 int get_random(int min, int max);
-
