@@ -3,16 +3,16 @@
 # Blake Danziger, Tracey Mills, Tadeas Uhlir
 # CS 50, Spring 2020
 
+OBJS = check.o
+LIB = common.a
 
 CC = gcc
 CFLAGS = -Wall -pedantic -std=c11 -ggdb
-OBJS = check.o
 MAKE = make
-LIB = common.a
 
 # Build the library by archiving object files
 $(LIB): $(OBJS)
-	ar cr $(LIB) $^
+	ar cr $@ $^
 
 # Dependencies: object files depend on header files
 check.o: check.h
@@ -25,5 +25,5 @@ clean:
 	rm -f *~ *.o
 	rm -f core
 	rm -f *core.*
-	rm -f $(LIB)
 	rm -f *.dSYM
+	rm -f $(LIB)

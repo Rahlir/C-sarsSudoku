@@ -1,35 +1,31 @@
 # Makefile for C-SarSudoku
-# compiles sudoku.c and the other modules
+# Compiles sudoku.c and the other modules
+# Libraries (common) have to be compiled separately
+#
 # Blake Danziger, Tracey Mills, Tadeas Uhlir
 # CS 50, Spring 2020
-
 
 CC = gcc
 CO = ./common
 CR = ./creator
 SO = ./solver
-PROG = sudoku
-OBJS = sudoku.o $(SO)/solver.o $(CR)/creator.o $(CO)/check.o $(CO)/common.a
 CFLAGS = -Wall -pedantic -std=c11 -ggdb -I$(CO) -I$(CR) -I$(SO)
 CLIBS = $(CO)/common.a
 MAKE = make
 
+PROG = sudoku
+OBJS = sudoku.o $(SO)/solver.o $(CR)/creator.o 
 
 ############## make main program ##############
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ $(CLIBS) -o $@
 
 
 # Dependencies: object files depend on header files
-common/check.o: $(CO)/check.h
+creator/creator.o: $(CR)/creator.h 
 
-common/common.a: $(CO)/check.h
-	$(MAKE) -C $(CO)
-
-creator/creator.o: $(CR)/creator.h $(CO)/check.h
-
-solver/solver.o: $(SO)/solver.h $(CO)/check.h
+solver/solver.o: $(SO)/solver.h
 
 .PHONY: all clean
 
@@ -37,10 +33,10 @@ all: $(PROG)
 
 ############## clean all  ##############
 clean:
+	$(MAKE) -C $(CO) clean
 	rm -f *~ *.o
-	rm -f */*.o
+	rm -f creator/*.o solver/*.o
 	rm -f core
 	rm -f *core.*
-	rm -f $(PROG)
 	rm -f *.dSYM
-	$(MAKE) -C $(CO) clean
+	rm -f $(PROG)
