@@ -9,7 +9,7 @@ CO = ./common
 CR = ./creator
 SO = ./solver
 PROG = sudoku
-OBJS = sudoku.o $(SO)/solver.o $(CO)/check.o $(CR)/creator.o $(CO)/common.a
+OBJS = sudoku.o $(SO)/solver.o $(CR)/creator.o $(CO)/check.o $(CO)/common.a
 CFLAGS = -Wall -pedantic -std=c11 -ggdb -I$(CO) -I$(CR) -I$(SO)
 CLIBS = $(CO)/common.a
 MAKE = make
@@ -38,10 +38,9 @@ all: $(PROG)
 ############## clean all  ##############
 clean:
 	rm -f *~ *.o
+	rm -f */*.o
 	rm -f core
 	rm -f *core.*
 	rm -f $(PROG)
 	rm -f *.dSYM
 	$(MAKE) -C $(CO) clean
-	$(MAKE) -C $(CR) clean
-	$(MAKE) -C $(SO) clean

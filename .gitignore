@@ -1,8 +1,9 @@
 # ignore these files
 sudoku
 
-# ignore object files
+# ignore object and library files
 *.o
+*.a
 
 # ignore core files
 core

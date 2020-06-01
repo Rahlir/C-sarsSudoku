@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
 
     //print output if a solution was found
     if (show)
-        print_grid(grid, size);
+        print_grid(grid, SUDOKU_SIZE);
 
     free(grid);
     return 0;

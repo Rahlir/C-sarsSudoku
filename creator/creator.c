@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include "check.h"
 
 int fill_grid(int *grid, int field, int size);
 int get_random(int min, int max);
