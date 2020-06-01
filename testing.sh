@@ -20,9 +20,12 @@ cat error_grid1 | ./sudoku solve
 echo "Solving grid with non-int chars:"
 cat error_grid2
 cat error_grid2 | ./sudoku solve
+
+##### THIS ERROR NOT CORRECT: IT STARTS READING FROM STANDARD INPUT
 echo "Solving grid with out-of-range ints:"
 cat error_grid3
 cat error_grid3 | ./sudoku solve
+#####
 echo "Solving grid with no solution:"
 cat error_grid4
 cat error_grid4 | ./sudoku solve
