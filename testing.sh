@@ -15,20 +15,20 @@ echo "Too many arguments..."
 echo "Invalid arg..."
 ./sudoku xyz
 echo "Solving grid with too few ints:"
-cat errorGrid1
-cat errorGrid1 | ./sudoku solve
+cat error_grid1
+cat error_grid1 | ./sudoku solve
 echo "Solving grid with non-int chars:"
-cat errorGrid2
-cat errorGrid2 | ./sudoku solve
+cat error_grid2
+cat error_grid2 | ./sudoku solve
 echo "Solving grid with out-of-range ints:"
-cat errorGrid3
-cat errorGrid3 | ./sudoku solve
+cat error_grid3
+cat error_grid3 | ./sudoku solve
 echo "Solving grid with no solution:"
-cat errorGrid4
-cat errorGrid4 | ./sudoku solve
+cat error_grid4
+cat error_grid4 | ./sudoku solve
 echo "Solving pre-filled grid with no solution:"
-cat errorGrid5
-cat errorGrid5 | ./sudoku solve
+cat error_grid5
+cat error_grid5 | ./sudoku solve
 echo ""
 #Success cases
 echo "These tests should succeed:"
