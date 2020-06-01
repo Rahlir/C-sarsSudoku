@@ -7,9 +7,10 @@
  *  CS 50, Spring 2020
  */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 #include "solver.h"
 #include "check.h"
 
@@ -39,14 +40,14 @@ int grid_copy(int *from, int *to, int size)
  */
 int solver(int *grid, int size)
 {
-	if (!check_valid(grid)) { // inputted grid already inconsisent, no solutions
-		return 2;
-	}
+    if (!check_valid(grid)) { // inputted grid already inconsisent, no solutions
+        return 2;
+    }
 
-	//	creates a solutions array and sets the first number in the array to 0
-	//		to signal that it does not yet contain a soltion
-	int *soln = malloc(size * sizeof(int));
-	*soln = 0;
+    //      creates a solutions array and sets the first number in the array to 0
+    //              to signal that it does not yet contain a soltion
+    int *soln = malloc(size * sizeof(int));
+    *soln = 0;
 
     if (solve_helper(grid, soln, size, 0) == 0) { // checked all numbers
         if (*(soln) == 0) {     // empty solution grid means no solutions
