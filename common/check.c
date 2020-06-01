@@ -15,7 +15,7 @@
 
 //////////////////// check_consistency ////////////////////
 //returns true if value in field in grid is legal, false otherwise
-bool check_consistent(int *grid, int field, int value) {
+bool check_consistency(int *grid, int field, int value) {
 	int row = field/9;	//rows 0-8
 	int col = field%9;	//cols 0-8
 	int box_corner =(((int)(row/3))*27) + (((int)(col/3))*3);
@@ -50,7 +50,7 @@ bool check_valid(int *grid)
 	for (int i = 0; i < 81; i++) {	// for each cell
 		if (*(grid+i) != 0) {	// if it's nonzero
 			// check if the current value is consistent
-			if (!check_consistent(grid, i, *(grid+i)))
+			if (!check_consistency(grid, i, *(grid+i)))
 				return false;
 		}
 	}

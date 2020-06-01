@@ -36,18 +36,14 @@ int grid_copy(int *from, int *to, int size)
 // returns true if it's the only solution, false if more than one solution
 int solver(int *grid, int size)
 {
-<<<<<<< HEAD
+	if (!check_valid(grid)) { // inputted grid already inconsisent, no solutions
+		return 2;
+	}
+
 	//	creates a solutions array and sets the first number in the array to 0
 	//		to signal that it does not yet contain a soltion
 	int *soln = malloc(size * sizeof(int));
 	*soln = 0;
-=======
-
-    // creates a solutions array and sets the first number in the array to 0
-    // to signal that it does not yet contain a soltion
-    int *soln = malloc(size * sizeof(int));
-    *soln = 0;
->>>>>>> e22b8ba35b44cdc4acb28263217dd433fd239cca
 
     if (solve_helper(grid, soln, size, 0) == 0) { // checked all numbers
         if (*(soln) == 0) {     // empty solution grid means no solutions
@@ -91,7 +87,7 @@ int solve_helper(int *grid, int *soln, int size, int field)
 
     // check all numbers
     for (int j = 1; j < 10; j++) { // try all numbers 1-9
-        if (check_consistent(grid, i, j)) {   // if number works, insert value and recurse deeper
+        if (check_consistency(grid, i, j)) {   // if number works, insert value and recurse deeper
             *(grid+i) = j;
             if (solve_helper(grid, soln, size, i+1) == 2) {
                 // if found second solution, 2 is returned

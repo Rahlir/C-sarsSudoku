@@ -9,8 +9,7 @@ CO = ./common
 CR = ./creator
 SO = ./solver
 PROG = sudoku
-OBJS = sudoku.o $(SO)/solver.o $(CO)/check.o $(CO)/common.a
-#$(CR)/creator.o#
+OBJS = sudoku.o $(SO)/solver.o $(CO)/check.o $(CR)/creator.o $(CO)/common.a
 CFLAGS = -Wall -pedantic -std=c11 -ggdb -I$(CO) -I$(CR) -I$(SO)
 CLIBS = $(CO)/common.a
 MAKE = make

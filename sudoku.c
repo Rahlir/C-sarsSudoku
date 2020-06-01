@@ -15,6 +15,7 @@ bool process_input(int *grid, int size);
 int main(int argc, char *argv[]) {
     char *mode;
     int size = 81;
+    bool show = true;
 
     //check arg #
     if(argc != 2) {
@@ -45,7 +46,17 @@ int main(int argc, char *argv[]) {
         //get puzzle to be solved
         if(process_input(grid, size)) {
             //initialize solver
-            solver(grid, size);
+            int res = solver(grid, size);
+            if (res == 0) { // one solution found
+                printf("One solution found:\n\n");
+            }
+            else if (res == 1) { // multiple solution found
+                printf("Multiple solutions found:\n\n");
+            }
+            else { // no solutions found
+                show = false;
+                printf("No solutions to puzzle\n");
+            }
         }
         else {
             printf("Error: invalid input\n");
@@ -59,8 +70,10 @@ int main(int argc, char *argv[]) {
         return 3;
     }
 
-    //print output
-    print_grid(grid, size);
+    //print output if a solution was found
+    if (show)
+        print_grid(grid, size);
+
     free(grid);
     return 0;
 }
