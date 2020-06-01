@@ -9,21 +9,24 @@
 #include "creator.h"
 #include "solver.h"
 
+static const int SUDOKU_SIZE = 81;
+static const char USAGE[] = "Usage: %s mode\n";
+
 void print_grid(int *grid, int size);
 bool process_input(int *grid, int size);
 
 int main(int argc, char *argv[]) {
     char *mode;
-    int size = 81;
 
     //check arg #
     if(argc != 2) {
-        fprintf(stderr, "Usage: provide one arg indicating mode\n");
+        fprintf(stderr, "Error: provide one arg indicating mode\n");
+        fprintf(stderr, USAGE, argv[0]);
         return 1;
     }
 
     //allocate memory for grid
-    int *grid = malloc(sizeof(int)*size);
+    int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
     if(grid == NULL) {
         fprintf(stderr, "Error: unable to allocate memory for grid\n");
         return 2;
@@ -34,18 +37,28 @@ int main(int argc, char *argv[]) {
     //create mode
     if(strcmp(mode, "create") == 0) {
         //initialize empty grid
-        for(int i=0; i<size; i++) {
+        for(int i=0; i<SUDOKU_SIZE; i++) {
             *(grid+i) = 0;
         }
         //initialize creator
-        creator(grid, size);
+        creator(grid, SUDOKU_SIZE);
     }
     //solve mode
     else if(strcmp(mode, "solve") == 0) {
         //get puzzle to be solved
-        if(process_input(grid, size)) {
+        if(process_input(grid, SUDOKU_SIZE)) {
             //initialize solver
-            solver(grid, size);
+            int return_code = solver(grid, SUDOKU_SIZE);
+            
+            if (return_code == 0) {
+                printf("Found unique solution:\n");
+            }
+            else if (return_code == 1) {
+                printf("Found multiple solutions, printing one:\n");
+            }
+            else if (return_code == 2) {
+                printf("Couldn't find any solutions\n");
+            }
         }
         else {
             printf("Error: invalid input\n");
@@ -60,7 +73,7 @@ int main(int argc, char *argv[]) {
     }
 
     //print output
-    print_grid(grid, size);
+    print_grid(grid, SUDOKU_SIZE);
     free(grid);
     return 0;
 }
