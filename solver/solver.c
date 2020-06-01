@@ -31,9 +31,12 @@ int grid_copy(int *from, int *to, int size)
 }
 
 //////////////////// solve ////////////////////
-// brute-force solves the puzzle, uses solve_helper to help with recursion
-// 
-// returns true if it's the only solution, false if more than one solution
+/* brute-force solves the puzzle, uses solve_helper to help with recursion
+ * returns:
+ * 0 if found only one solution,
+ * 1 if more than one solution,
+ * 2 if found no solutions
+ */
 int solver(int *grid, int size)
 {
 	if (!check_valid(grid)) { // inputted grid already inconsisent, no solutions

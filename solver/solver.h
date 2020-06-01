@@ -11,7 +11,6 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
 
 
 //////////////////// solve ////////////////////
@@ -27,7 +26,6 @@
  *		0 if found only one solution
  *		1 if more than one solution
  *		2 if found no solutions
- *		3 if invalid grid size
  *
  * The solver only runs if size is 81
  */
