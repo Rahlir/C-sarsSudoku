@@ -7,24 +7,47 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+
+#include "creator.h"
 #include "check.h"
+#include "solver.h"
+#include "utils.h"
 
+/*------------------------------static variables------------------------------*/
+
+// Static variable used to indicate whether srand(time(0)) was called
+static bool RAND_INIT = false;
+
+/*---------------------------------prototypes---------------------------------*/
+
+////////////// fill_grid ///////////////
+/* recieves grid to be filled, current field number to fill, and size of grid
+ * recursively fills full valid sudoku grid using back-tracking
+ * returns 1 on success and 0 on failue
+ */
 int fill_grid(int *grid, int field, int size);
+
+////////////// get_random  ///////////////
+//returns random int min-max inclusive
 int get_random(int min, int max);
-void remove_fields(int *grid, int n);
 
+////////////// remove_fields  ///////////////
+void remove_fields(int *grid, int n, int size);
 
-void creator(int *grid, int size) {
-    //if(size == 81)    do we want to do this? should we even pass size or just assume its 81?
-    //  I don't think this hurts -blake
+int remove_helper(int *grid, int size, int field, int removed, int goal);
+
+/*---------------------------------functions----------------------------------*/
+
+void creator(int *grid, int size)
+{
     fill_grid(grid, 0, size);
-    //remove_fields(grid, n);
+    remove_fields(grid, 40, size);
 }
 
-//fills grid value by value using backtracking
-int fill_grid(int *grid, int field, int size) {
+int fill_grid(int *grid, int field, int size)
+{
     if(field >= size)
-            return 0;
+        return 0;
     int start = get_random(1, 9);
     int value = start;
     //find value that works
@@ -34,7 +57,7 @@ int fill_grid(int *grid, int field, int size) {
             *(grid+field) = value;
             //break out of loop if next field works
             if(fill_grid(grid, field+1, size) == 0) {
-                    break;
+                break;
             }
             else {
                 *(grid+field) = 0;
@@ -49,38 +72,52 @@ int fill_grid(int *grid, int field, int size) {
     return 0;
 }
 
-//returns random int between min and max inclusive
-int get_random(int min, int max) {
-    srand(time(0));
+int get_random(int min, int max)
+{
+    // srand(time(0)) must only be called once, otherwise we end up with
+    // (mostly) the same random number everytime we call get_random()
+    if (!RAND_INIT) {
+        srand(time(0));
+        RAND_INIT = true;
+    }
     return (rand()%(max-min+1))+min;
 }
 
-//this does not work yet lol just some thoughts
-/*
 //removes n fields from completed grid such that it has a unique solution
-void remove_fields(int *grid, int n) {
-        remove_helper(grid, get_random(0, 80), 0, 40);
+void remove_fields(int *grid, int n, int size)
+{
+    remove_helper(grid, size, get_random(0, size-1), 0, n);
 }
 
-int remove_helper(int *grid, int field, int removed, int goal) {
-        if(removed >= goal) {
-                return 0;
+int remove_helper(int *grid, int size, int field, int removed, int goal)
+{
+    if(removed >= goal) {
+        return 0;
+    }
+
+    int original_value = *(grid+field);
+
+    //check if already removed
+    if(original_value == 0) {
+        return remove_helper(grid, size, get_random(0, size-1), removed, goal);
+    }
+    else {
+        *(grid+field) = 0;
+
+        int *dummy_solution = calloc(size, sizeof(int));
+        if (dummy_solution == NULL) {
+            printf("Error: memory error creating solution grid\n");
+            return 1;
         }
-        int value = *(grid+field);
-        //check if already removed
-        if(value == 0) {
-                remove_helper(grid, get_random(0, 80), removed, goal);
+
+        grid_copy(grid, dummy_solution, size);
+
+        if(solver(dummy_solution, size) == 0) {
+            return remove_helper(grid, size, get_random(0, size-1), removed+1, goal);
         }
         else {
-                *(grid+field) = 0;
-                if(solver(grid, 81)) {
-                        while(remove_helper(grid, get_random(0, 80), removed+1, goal) == 0) {
-                                return 0;
-                        }
-                        else {
-                                
-                        }
-                }
+            *(grid+field) = original_value;
+            return remove_helper(grid, size, get_random(0, size-1), removed, goal);
         }
+    }
 }
-*/
