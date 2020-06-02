@@ -13,23 +13,10 @@
 
 #include "solver.h"
 #include "check.h"
+#include "utils.h"
 
 //////////////////// local functions ////////////////////
 int solve_helper(int *grid, int *soln, int size, int field);
-int grid_copy(int *from, int *to, int size);
-
-//////////////////// grid_copy ////////////////////
-/*      copies one grid into another
- *      assumes both grids have the the same size
- */
-int grid_copy(int *from, int *to, int size)
-{ 
-    for (int i = 0; i < size; i++) {
-        *(to+i) = *(from+i);
-    }
-
-    return 0;
-}
 
 //////////////////// solve ////////////////////
 /* brute-force solves the puzzle, uses solve_helper to help with recursion

@@ -9,8 +9,8 @@
 #ifndef __SOLVER_H
 #define __SOLVER_H
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 //////////////////// solve ////////////////////
