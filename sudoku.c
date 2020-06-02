@@ -94,31 +94,11 @@ int main(int argc, char *argv[]) {
  * reads n = "size" ints into grid, adding them in order
  * returns true if n = "size" ints read into grid, false otherwise
  */
-bool process_input(int *grid, int size) {
+bool process_input(int *grid, int size)
+{
     for(int i=0; i<size; i++) {
-
-        #ifdef UNITTEST
-            printf("\ni: %d\n", i);
-        #endif
-
-        char ch[2];
-        ch[1] = '?';
-        if(fscanf(stdin, "%c", &ch[0]) == 1) {
-
-            #ifdef UNITTEST
-                printf("ch: %c\n", ch[0]);
-            #endif
-
-            if (isdigit(ch[0])) {
-                sscanf(ch, "%d", (grid+i));
-                
-                #ifdef UNITTEST
-                    printf("grid: %d\n", *(grid+i));
-                #endif
-            }
-            else {
-                i--;
-            }
+        if(fscanf(stdin, "%d", (grid+i)) != 1) {	
+            return false;
         }
     }
     return true;
