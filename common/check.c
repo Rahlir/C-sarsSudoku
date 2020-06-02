@@ -47,8 +47,12 @@ bool check_valid(int *grid)
     for (int i = 0; i < 81; i++) {  // for each cell
         if (*(grid+i) != 0) {   // if it's nonzero
             // check if the current value is consistent
-            if (!check_consistency(grid, i, *(grid+i)))
+            if (!check_consistency(grid, i, *(grid+i))) {
                 return false;
+			}
+            if ((*(grid+i)) < 0 || (*(grid+i) > 9)) { // there is an invalid integer in the grid
+                return false;
+            }
         }
     }
     return true;

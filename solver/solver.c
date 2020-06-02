@@ -27,11 +27,12 @@ int solve_helper(int *grid, int *soln, int size, int field);
  * 0 if found only one solution,
  * 1 if more than one solution,
  * 2 if found no solutions
+ * 3 if the inputted grid is already inconsistent or contains invalid values
  */
 int solver(int *grid, int size)
 {
-    if (!check_valid(grid)) { // inputted grid already inconsisent, no solutions
-        return 2;
+    if (!check_valid(grid)) { // inputted grid already inconsisent or contains invalid values, no solutions
+        return 3;
     }
 
     //      creates a solutions array and sets the first number in the array to 0

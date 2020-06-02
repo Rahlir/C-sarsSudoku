@@ -18,75 +18,86 @@ void print_grid(int *grid, int size);
 bool process_input(int *grid, int size);
 
 int main(int argc, char *argv[]) {
-    char *mode;
-    bool show = true;
+    #ifndef UNITTEST    // run normally if not testing
 
-    //check arg #
-    if(argc != 2) {
-        fprintf(stderr, "Error: provide one arg indicating mode\n");
-        fprintf(stderr, USAGE, argv[0]);
-        return 1;
-    }
+        char *mode;
+        bool show = true;
 
-    //allocate memory for grid
-    int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
-    if(grid == NULL) {
-        fprintf(stderr, "Error: unable to allocate memory for grid\n");
-        return 2;
-    }
-
-    mode = argv[1];
-
-    //create mode
-    if(strcmp(mode, "create") == 0) {
-        //initialize empty grid
-        for(int i=0; i<SUDOKU_SIZE; i++) {
-            *(grid+i) = 0;
+        //check arg #
+        if(argc != 2) {
+            fprintf(stderr, "Error: provide one arg indicating mode\n");
+            fprintf(stderr, USAGE, argv[0]);
+            return 1;
         }
-        //initialize creator
-        creator(grid, SUDOKU_SIZE);
-    }
-    //solve mode
-    else if(strcmp(mode, "solve") == 0) {
-        //get puzzle to be solved
-        if(process_input(grid, SUDOKU_SIZE)) {
 
-            #ifdef UNITTEST
-                print_grid(grid, SUDOKU_SIZE);
-            #endif
-            
-            //initialize solver
-            int return_code = solver(grid, SUDOKU_SIZE);
-            
-            if (return_code == 0) {
-                printf("Found unique solution:\n");
+        //allocate memory for grid
+        int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
+        if(grid == NULL) {
+            fprintf(stderr, "Error: unable to allocate memory for grid\n");
+            return 2;
+        }
+
+        mode = argv[1];
+
+        //create mode
+        if(strcmp(mode, "create") == 0) {
+            //initialize empty grid
+            for(int i=0; i<SUDOKU_SIZE; i++) {
+                *(grid+i) = 0;
             }
-            else if (return_code == 1) {
-                printf("Found multiple solutions, printing one:\n");
-            }
-            else if (return_code == 2) {
-                show = false;
-                printf("Couldn't find any solutions\n");
+            //initialize creator
+            creator(grid, SUDOKU_SIZE);
+        }
+        //solve mode
+        else if(strcmp(mode, "solve") == 0) {
+            //get puzzle to be solved
+            if(process_input(grid, SUDOKU_SIZE)) {
+
+                #ifdef UNITTEST
+                    print_grid(grid, SUDOKU_SIZE);
+                #endif
+                
+                //initialize solver
+                int return_code = solver(grid, SUDOKU_SIZE);
+                
+                if (return_code == 0) {
+                    printf("Found unique solution:\n");
+                }
+                else if (return_code == 1) {
+                    printf("Found multiple solutions, printing one:\n");
+                }
+                else if (return_code == 2) {
+                    show = false;
+                    printf("Couldn't find any solutions\n");
+                }
+                else if (return_code == 3) {
+                    show = false;
+                    printf("Error: invalid input grid\n");
+                    return 4;
+                }
             }
         }
+        //invalid mode
         else {
-            printf("Error: invalid input\n");
-            return 4;
+            fprintf(stderr, "Error: mode must be either 'create' or 'solve'\n");
+            free(grid);
+            return 3;
         }
-    }
-    //invalid mode
-    else {
-        fprintf(stderr, "Error: mode must be either 'create' or 'solve'\n");
+
+        //print output if a solution was found
+        if (show)
+            print_grid(grid, SUDOKU_SIZE);
+
         free(grid);
-        return 3;
-    }
+        return 0;
+    
+    #endif  // end of not test
 
-    //print output if a solution was found
-    if (show)
-        print_grid(grid, SUDOKU_SIZE);
+    #ifdef UNITTEST     // run test code if testing
+        printf("UNIT TESTING\n");
 
-    free(grid);
-    return 0;
+
+    #endif  // end of test
 }
 
 /*
@@ -94,31 +105,13 @@ int main(int argc, char *argv[]) {
  * reads n = "size" ints into grid, adding them in order
  * returns true if n = "size" ints read into grid, false otherwise
  */
-bool process_input(int *grid, int size) {
+
+
+bool process_input(int *grid, int size)
+{
     for(int i=0; i<size; i++) {
-
-        #ifdef UNITTEST
-            printf("\ni: %d\n", i);
-        #endif
-
-        char ch[2];
-        ch[1] = '?';
-        if(fscanf(stdin, "%c", &ch[0]) == 1) {
-
-            #ifdef UNITTEST
-                printf("ch: %c\n", ch[0]);
-            #endif
-
-            if (isdigit(ch[0])) {
-                sscanf(ch, "%d", (grid+i));
-                
-                #ifdef UNITTEST
-                    printf("grid: %d\n", *(grid+i));
-                #endif
-            }
-            else {
-                i--;
-            }
+        if(fscanf(stdin, "%d", (grid+i)) != 1) {	
+            return false;
         }
     }
     return true;
