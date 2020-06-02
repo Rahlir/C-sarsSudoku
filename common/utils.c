@@ -9,10 +9,8 @@
  * -----------------------------------------------------------------------------
  */
 
-//////////////////// grid_copy ////////////////////
-/*      copies one grid into another
- *      assumes both grids have the the same size
- */
+#include "utils.h"
+
 int grid_copy(int *from, int *to, int size)
 { 
     for (int i = 0; i < size; i++) {

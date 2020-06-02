@@ -15,8 +15,11 @@
 #include "check.h"
 #include "utils.h"
 
-//////////////////// local functions ////////////////////
+/*---------------------------------prototypes---------------------------------*/
+
 int solve_helper(int *grid, int *soln, int size, int field);
+
+/*---------------------------------functions----------------------------------*/
 
 //////////////////// solve ////////////////////
 /* brute-force solves the puzzle, uses solve_helper to help with recursion

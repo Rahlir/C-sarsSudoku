@@ -16,7 +16,8 @@
 
 ///////////// creator ////////////////
 /* recieves grid to be filled, along with its size
- * calls other functions to fill grid to make a uniqely solvable sudoku puzzle
+ * calls other functions to fill grid to make a uniqely
+ * solvable sudoku puzzle
  */
 void creator(int *grid, int size);
 

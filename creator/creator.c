@@ -28,12 +28,22 @@ static bool RAND_INIT = false;
 int fill_grid(int *grid, int field, int size);
 
 ////////////// get_random  ///////////////
-//returns random int min-max inclusive
+/* returns random int in the range of min-max inclusive
+ */
 int get_random(int min, int max);
 
 ////////////// remove_fields  ///////////////
+/* Receives filled grid from which values must be removed repeatedly
+ * while ensuring that there is still a unique solution. Calls remove_helper
+ * to achieve that
+ */
 void remove_fields(int *grid, int n, int size);
 
+///////////// remove_helper ////////////////
+/* Recursively removes random field from a pre-filled sudoku grid
+ * and checks whether there is still unique solution to the puzzle.
+ * Returns 0 on success and 1 on error
+ */
 int remove_helper(int *grid, int size, int field, int removed, int goal);
 
 /*---------------------------------functions----------------------------------*/
@@ -91,19 +101,21 @@ void remove_fields(int *grid, int n, int size)
 
 int remove_helper(int *grid, int size, int field, int removed, int goal)
 {
+    // Successfully removed enough values
     if(removed >= goal) {
         return 0;
     }
 
     int original_value = *(grid+field);
 
-    //check if already removed
+    // Check if already removed
     if(original_value == 0) {
         return remove_helper(grid, size, get_random(0, size-1), removed, goal);
     }
     else {
         *(grid+field) = 0;
 
+        // Need dummy_solution grid as this is passed to solver
         int *dummy_solution = calloc(size, sizeof(int));
         if (dummy_solution == NULL) {
             printf("Error: memory error creating solution grid\n");
@@ -113,12 +125,14 @@ int remove_helper(int *grid, int size, int field, int removed, int goal)
         grid_copy(grid, dummy_solution, size);
 
         if(solver(dummy_solution, size) == 0) {
+            // Free allocated memory and return
             free(dummy_solution);
             return remove_helper(grid, size, get_random(0, size-1), removed+1, goal);
         }
         else {
             *(grid+field) = original_value;
 
+            // Free allocated memory and return
             free(dummy_solution);
             return remove_helper(grid, size, get_random(0, size-1), removed, goal);
         }

@@ -12,6 +12,10 @@
 #ifndef __UTILS_H_
 #define __UTILS_H_
 
+//////////////////// grid_copy ////////////////////
+/*      copies one grid into another
+ *      assumes both grids have the the same size
+ */
 int grid_copy(int *from, int *to, int size);
 
 #endif /* ifndef __UTILS_H_ */
