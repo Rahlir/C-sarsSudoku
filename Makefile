@@ -27,9 +27,12 @@ creator/creator.o: $(CR)/creator.h
 
 solver/solver.o: $(SO)/solver.h
 
-.PHONY: all clean
+.PHONY: all clean valgrind
 
 all: $(PROG) 
+
+valgrind: all
+	bash valgrind.sh
 
 ############## clean all  ##############
 clean:
