@@ -27,12 +27,15 @@ creator/creator.o: $(CR)/creator.h
 
 solver/solver.o: $(SO)/solver.h
 
-.PHONY: all clean valgrind
+.PHONY: all clean valgrind test
 
 all: $(PROG) 
 
 valgrind: all
 	bash valgrind.sh
+
+test: all
+	bash testing.sh
 
 ############## clean all  ##############
 clean:
