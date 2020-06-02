@@ -113,10 +113,13 @@ int remove_helper(int *grid, int size, int field, int removed, int goal)
         grid_copy(grid, dummy_solution, size);
 
         if(solver(dummy_solution, size) == 0) {
+            free(dummy_solution);
             return remove_helper(grid, size, get_random(0, size-1), removed+1, goal);
         }
         else {
             *(grid+field) = original_value;
+
+            free(dummy_solution);
             return remove_helper(grid, size, get_random(0, size-1), removed, goal);
         }
     }
