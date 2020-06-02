@@ -3,7 +3,7 @@
 # Blake Danziger, Tracey Mills, Tadeas Uhlir
 # CS 50, Spring 2020
 
-OBJS = check.o
+OBJS = check.o utils.o
 LIB = common.a
 
 CC = gcc
@@ -16,6 +16,8 @@ $(LIB): $(OBJS)
 
 # Dependencies: object files depend on header files
 check.o: check.h
+
+utils.o: utils.h
 
 .PHONY: all clean
 
