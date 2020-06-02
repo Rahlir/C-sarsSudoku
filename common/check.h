@@ -10,9 +10,9 @@
 #ifndef __CHECK_H
 #define __CHECK_H
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 
 //////////////////// check_consistency ////////////////////
