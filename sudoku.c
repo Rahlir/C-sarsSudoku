@@ -96,8 +96,29 @@ int main(int argc, char *argv[]) {
  */
 bool process_input(int *grid, int size) {
     for(int i=0; i<size; i++) {
-        if(fscanf(stdin, "%d", (grid+i)) != 1) {	
-            return false;
+
+        #ifdef UNITTEST
+            printf("\ni: %d\n", i);
+        #endif
+
+        char ch[2];
+        ch[1] = '?';
+        if(fscanf(stdin, "%c", &ch[0]) == 1) {
+
+            #ifdef UNITTEST
+                printf("ch: %c\n", ch[0]);
+            #endif
+
+            if (isdigit(ch[0])) {
+                sscanf(ch, "%d", (grid+i));
+                
+                #ifdef UNITTEST
+                    printf("grid: %d\n", *(grid+i));
+                #endif
+            }
+            else {
+                i--;
+            }
         }
     }
     return true;
