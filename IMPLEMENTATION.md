@@ -1,9 +1,9 @@
 
 C-SarSudoku Implementation Spec
 ==========================
+Blake Danziger, Tracey Mills, Tadeáš Uhlíř
 
-Blake Danziger, Tracey Mills, Tadeas Uhlir
-May 2020
+Spring 2020
 ---------
 
 ## main

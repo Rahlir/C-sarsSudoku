@@ -90,6 +90,8 @@ int main(int argc, char *argv[]) {
     #endif  // end of not test
 
     #ifdef UNITTEST     // run test code if testing
+        // print the test output to testing.out
+
         printf("UNIT TESTING\n");
         int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
 
@@ -97,7 +99,7 @@ int main(int argc, char *argv[]) {
         /**************** Test functions in sudoku.c ****************/
         ///////////// process_input /////////////
         FILE *fp = fopen("testfiles/unittset_grid10", "r");
-        process_input(grid, SUDOKU_SIZE, stdin);
+        process_input(grid, SUDOKU_SIZE, fp);
         fclose(fp);
 
         ///////////// print_grid /////////////

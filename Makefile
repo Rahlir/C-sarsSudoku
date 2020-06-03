@@ -1,8 +1,7 @@
 # Makefile for C-SarSudoku
 # Compiles sudoku.c and the other modules
 # Libraries (common) have to be compiled separately
-#
-# Blake Danziger, Tracey Mills, Tadeas Uhlir
+# Blake Danziger, Tracey Mills, Tadeáš Uhlíř
 # CS 50, Spring 2020
 
 CC = gcc
@@ -46,8 +45,9 @@ all: common/common.a $(PROG) $(TESTPROG)
 valgrind: all
 	bash valgrind.sh
 
-test: $(TESTPROG)
-	bash testing.sh
+test: all
+	./testing.sh > testing.out
+	./sudoku-test >> testing.out
 
 ############## clean all  ##############
 clean:
