@@ -46,8 +46,8 @@ valgrind: all
 	bash valgrind.sh
 
 test: all
-	./testing.sh > testing.out
-	./sudoku-test >> testing.out
+	./testing.sh &> testing.out
+	./sudoku-test &>> testing.out
 
 ############## clean all  ##############
 clean:

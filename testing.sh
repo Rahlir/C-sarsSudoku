@@ -55,5 +55,6 @@ do
 	echo "Solution:"
 	./sudoku solve < "$testDir"/grid9
 	echo ""
+	sleep 1
 done
 

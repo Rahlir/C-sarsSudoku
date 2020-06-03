@@ -13,11 +13,12 @@
 #include <stdlib.h>
 
 
-//////////////////// solve ////////////////////
+//////////////////// solver ////////////////////
 /* brute-force solves an unsolved sudoku grid
  * 
  * takes an integer array as an input that represents the valuse in the unsolved sudoku grid
  * zeros in the unsolved array represent fields that need to be solved
+ *
  *
  * takes as arguments:
  *		a pointer to an integer array representing the grid being solved

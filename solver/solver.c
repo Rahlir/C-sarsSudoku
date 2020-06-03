@@ -21,7 +21,7 @@ int solve_helper(int *grid, int *soln, int size, int field);
 
 /*---------------------------------functions----------------------------------*/
 
-//////////////////// solve ////////////////////
+//////////////////// solver ////////////////////
 /* brute-force solves the puzzle, uses solve_helper to help with recursion
  * returns:
  * 0 if found only one solution,
@@ -31,6 +31,10 @@ int solve_helper(int *grid, int *soln, int size, int field);
  */
 int solver(int *grid, int size)
 {
+    // check that grid is valid
+    if (!check_valid(grid)) { // grid inconsisent or contains invalid values
+        return 3;
+    }
     //      creates a solutions array and sets the first number in the array to 0
     //              to signal that it does not yet contain a soltion
     int *soln = malloc(size * sizeof(int));

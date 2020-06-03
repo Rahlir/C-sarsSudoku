@@ -67,9 +67,14 @@ int main(int argc, char *argv[]) {
                     free(grid);
                     return 4;
                 }
+                else if (return_code == 3) {
+                    fprintf(stderr, "Error: invalid grid\n");
+                    free(grid);
+                    return 5;
+                }
             }
             else {
-                printf("Error: invalid grid\n");
+                fprintf(stderr, "Error: invalid grid\n");
                 free(grid);
                 return 5;
             }
@@ -97,33 +102,74 @@ int main(int argc, char *argv[]) {
 
 
         /**************** Test functions in sudoku.c ****************/
-        ///////////// process_input /////////////
-        FILE *fp = fopen("testfiles/unittset_grid10", "r");
-        process_input(grid, SUDOKU_SIZE, fp);
+        ///////////// process_input and print_grid/////////////
+        printf("\n************** process_input and print_grid **************\n");
+        printf("Test on empty grid (all 0s): first command should return true (1)\nand print_grid should print an empty grid correctly\n");
+        FILE *fp = fopen("testfiles/empty_grid", "r");
+        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+        print_grid(grid, SUDOKU_SIZE);
         fclose(fp);
 
-        ///////////// print_grid /////////////
+        printf("\nClear the grid after each call\n");
+        free(grid);
+        grid = malloc(sizeof(int)*SUDOKU_SIZE);
+
+        printf("\nTest on valid grid: first command should return true (1) \nand print_grid should print correctly\n");
+        fp = fopen("testfiles/unittest_grid10", "r");
+        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+        print_grid(grid, SUDOKU_SIZE);
+        fclose(fp);
+
+        printf("\nTest on an inconsistent grid with: should return false (0)\n");
+        fp = fopen("testfiles/unittest_grid11", "r");
+        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+        fclose(fp);
+
+        printf("\nTest on grid with out of range values: should return false (0)\n");
+        fp = fopen("testfiles/unittest_grid12", "r");
+        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+        fclose(fp);
+
+
+        printf("\nTest on valid grid but numbers are unevenly spaced across the file: \nshould return true (1) and print grid normally\n");
+        fp = fopen("testfiles/unittest_grid13", "r");
+        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+        print_grid(grid, SUDOKU_SIZE);
+        fclose(fp);
+
+
+        printf("\nTest on invvalid grid with non-integers: \nshould return false (0)\n");
+        fp = fopen("testfiles/unittest_grid14", "r");
+        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+        fclose(fp);
+
+
+        free(grid);
 
 
         /**************** Test functions in check.h ****************/
         ///////////// check_consistency /////////////
+        printf("\n************** check_consistency **************\n");
 
         ///////////// check_valid /////////////
+        printf("\n************** check_valid **************\n");
 
 
         /**************** Test functions in util.h ****************/
         ///////////// girid_copy /////////////
+        printf("\n************** grid_copy **************\n");
 
 
         /**************** Test functions in creator.h ****************/
         ///////////// creator /////////////
+        printf("\n************** creator **************\n");
 
 
         /**************** Test functions in solver.h ****************/
         ///////////// solver /////////////
+        printf("\n************** solver **************\n");
 
 
-        free(grid);
 
     #endif  // end of test
 }
