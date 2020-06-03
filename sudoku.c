@@ -150,6 +150,29 @@ int main(int argc, char *argv[]) {
         /**************** Test functions in check.h ****************/
         ///////////// check_consistency /////////////
         printf("\n************** check_consistency **************\n");
+	int *test_grid;
+	for(int i=0; i<81; i++)
+		*(test_grid+i) = 0;
+	for(int i=1; i<10; i++)
+		*(test_grid+i) = i;
+	
+	//check row
+	printf("Test on row with repeat ints: \nshould return false\n");
+	printf("%s\n", check_consistency(test_grid, 0, 2));
+	printf("Test on row with no repeat ints: \nshould return true\n");
+	check_consistency(test_grid, 0, 1);
+
+	//check col
+	printf("Test on col with repeat ints: \nshould return false\n");
+        printf("%s\n", check_consistency(test_grid, 9, 1));
+        printf("Test on col with no repeat ints: \nshould return true\n");
+        check_consistency(test_grid, 9, 5);
+
+	//check square
+	printf("Test on square with repeat ints: \nshould return false\n");
+        printf("%s\n", check_consistency(test_grid, 9, 2));
+        printf("Test on square with no repeat ints: \nshould return true\n");
+        check_consistency(test_grid, 9, 5);
 
         ///////////// check_valid /////////////
         printf("\n************** check_valid **************\n");
