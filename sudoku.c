@@ -104,9 +104,9 @@ int main(int argc, char *argv[]) {
         /**************** Test functions in sudoku.c ****************/
         ///////////// process_input and print_grid/////////////
         printf("\n************** process_input and print_grid **************\n");
-        printf("Test on empty grid (all 0s): first command should return true (1)\nand print_grid should print an empty grid correctly\n");
+        printf("Test on empty grid (all 0s): first command should return true\nand print_grid should print an empty grid correctly\n");
         FILE *fp = fopen("testfiles/empty_grid", "r");
-        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+	printf(process_input(grid, SUDOKU_SIZE, fp) ? "true\n" : "false\n");
         print_grid(grid, SUDOKU_SIZE);
         fclose(fp);
 
@@ -114,33 +114,33 @@ int main(int argc, char *argv[]) {
         free(grid);
         grid = malloc(sizeof(int)*SUDOKU_SIZE);
 
-        printf("\nTest on valid grid: first command should return true (1) \nand print_grid should print correctly\n");
+        printf("\nTest on valid grid: first command should return true \nand print_grid should print correctly\n");
         fp = fopen("testfiles/unittest_grid10", "r");
-        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+	printf(process_input(grid, SUDOKU_SIZE, fp) ? "true\n" : "false\n");
         print_grid(grid, SUDOKU_SIZE);
         fclose(fp);
 
-        printf("\nTest on an inconsistent grid with: should return false (0)\n");
+        printf("\nTest on an inconsistent grid with: should return false\n");
         fp = fopen("testfiles/unittest_grid11", "r");
-        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+	printf(process_input(grid, SUDOKU_SIZE, fp) ? "true\n" : "false\n");
         fclose(fp);
 
-        printf("\nTest on grid with out of range values: should return false (0)\n");
+        printf("\nTest on grid with out of range values: should return false\n");
         fp = fopen("testfiles/unittest_grid12", "r");
-        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+	printf(process_input(grid, SUDOKU_SIZE, fp) ? "true\n" : "false\n");
         fclose(fp);
 
 
-        printf("\nTest on valid grid but numbers are unevenly spaced across the file: \nshould return true (1) and print grid normally\n");
+        printf("\nTest on valid grid but numbers are unevenly spaced across the file: \nshould return true and print grid normally\n");
         fp = fopen("testfiles/unittest_grid13", "r");
-        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+	printf(process_input(grid, SUDOKU_SIZE, fp) ? "true\n" : "false\n");
         print_grid(grid, SUDOKU_SIZE);
         fclose(fp);
 
 
-        printf("\nTest on invvalid grid with non-integers: \nshould return false (0)\n");
+        printf("\nTest on invalid grid with non-integers: \nshould return false\n");
         fp = fopen("testfiles/unittest_grid14", "r");
-        printf("%d\n", process_input(grid, SUDOKU_SIZE, fp));
+	printf(process_input(grid, SUDOKU_SIZE, fp) ? "true\n" : "false\n");
         fclose(fp);
 
 
@@ -151,28 +151,34 @@ int main(int argc, char *argv[]) {
         ///////////// check_consistency /////////////
         printf("\n************** check_consistency **************\n");
 	int *test_grid;
+	test_grid = malloc(sizeof(int)*SUDOKU_SIZE);
 	for(int i=0; i<81; i++)
 		*(test_grid+i) = 0;
-	for(int i=1; i<10; i++)
-		*(test_grid+i) = i;
+	for(int i=0; i<9; i++)
+		*(test_grid+i) = i+1;
 	
 	//check row
 	printf("Test on row with repeat ints: \nshould return false\n");
-	printf("%s\n", check_consistency(test_grid, 0, 2));
+	printf(check_consistency(test_grid, 0, 2) ? "true\n" : "false\n");
 	printf("Test on row with no repeat ints: \nshould return true\n");
-	check_consistency(test_grid, 0, 1);
+	printf(check_consistency(test_grid, 0, 1) ? "true\n" : "false\n");
+	printf("\n");
 
 	//check col
 	printf("Test on col with repeat ints: \nshould return false\n");
-        printf("%s\n", check_consistency(test_grid, 9, 1));
-        printf("Test on col with no repeat ints: \nshould return true\n");
-        check_consistency(test_grid, 9, 5);
+        printf(check_consistency(test_grid, 9, 1) ? "true\n" : "false\n");
+	printf("Test on col with no repeat ints: \nshould return true\n");
+	printf(check_consistency(test_grid, 9, 5) ? "true\n" : "false\n");
+	printf("\n");
 
 	//check square
 	printf("Test on square with repeat ints: \nshould return false\n");
-        printf("%s\n", check_consistency(test_grid, 9, 2));
+        printf(check_consistency(test_grid, 9, 2) ? "true\n" : "false\n");
         printf("Test on square with no repeat ints: \nshould return true\n");
-        check_consistency(test_grid, 9, 5);
+	printf(check_consistency(test_grid, 9, 5) ? "true\n" : "false\n");
+	printf("\n");
+	
+	free(test_grid);
 
         ///////////// check_valid /////////////
         printf("\n************** check_valid **************\n");
