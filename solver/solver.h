@@ -2,7 +2,7 @@
  *
  *  contains functions that are used to solve sudoku puzzles
  *
- *  Blake Danziger, Tracey Mills, Tadeas Uhlir
+ *  Blake Danziger, Tracey Mills, Tadeáš Uhlíř
  *  CS 50, Spring 2020
  */
 

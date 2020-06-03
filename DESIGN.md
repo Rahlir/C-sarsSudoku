@@ -1,4 +1,16 @@
-# C-sarSudoku Design
+C-SarSudoku Design Spec
+==========================
+Blake Danziger, Tracey Mills, Tadeáš Uhlíř
+
+Spring 2020
+---------
+
+/*  creator.c file for C-SarSudoku
+ *
+ *  contains functions that are used to create sudoku puzzles
+ *
+ *  Blake Danziger, Tracey Mills, Tadeáš Uhlíř
+ *  CS 50, Spring 2020
 
 C-sarSudoku program generates and solves sudoku puzzles. Creator creates
 sudoku puzzle with a unique solution.
