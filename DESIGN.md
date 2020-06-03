@@ -5,13 +5,6 @@ Blake Danziger, Tracey Mills, Tadeáš Uhlíř
 Spring 2020
 ---------
 
-/*  creator.c file for C-SarSudoku
- *
- *  contains functions that are used to create sudoku puzzles
- *
- *  Blake Danziger, Tracey Mills, Tadeáš Uhlíř
- *  CS 50, Spring 2020
-
 C-sarSudoku program generates and solves sudoku puzzles. Creator creates
 sudoku puzzle with a unique solution.
 
@@ -62,7 +55,7 @@ puzzle (format described in [user interface](#user-interface))
     data structure storing the grid
     * `print_grid` function which prints the grid to stdout
 * `creator` module
-    * `generate_grid` function to generate filled out grid
+    * `fill_grid` function to generate filled out grid
     * `remove_values` function that systematically removes values from the grid
     such that there is one unique solution
 * `solver` module
