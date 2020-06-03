@@ -1,27 +1,27 @@
-/*
- * sudoku - generates and solves sudoku puzzles
+/*  main module for C-sarSudoku
+ *  sudoku.c - generates sudoku puzzles with unique solutions and solves sudoku puzzles
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <ctype.h>
 
 #include "creator.h"
 #include "solver.h"
+#include "check.h"
+#include "utils.h"
 
 static const int SUDOKU_SIZE = 81;
 static const char USAGE[] = "Usage: %s mode\n";
 
 void print_grid(int *grid, int size);
-bool process_input(int *grid, int size);
+bool process_input(int *grid, int size, FILE *fp);
 
 int main(int argc, char *argv[]) {
     #ifndef UNITTEST    // run normally if not testing
 
         char *mode;
-        bool show = true;
 
         //check arg #
         if(argc != 2) {
@@ -51,11 +51,7 @@ int main(int argc, char *argv[]) {
         //solve mode
         else if(strcmp(mode, "solve") == 0) {
             //get puzzle to be solved
-            if(process_input(grid, SUDOKU_SIZE)) {
-
-                #ifdef UNITTEST
-                    print_grid(grid, SUDOKU_SIZE);
-                #endif
+            if(process_input(grid, SUDOKU_SIZE, stdin)) {
                 
                 //initialize solver
                 int return_code = solver(grid, SUDOKU_SIZE);
@@ -67,14 +63,15 @@ int main(int argc, char *argv[]) {
                     printf("Found multiple solutions, printing one:\n");
                 }
                 else if (return_code == 2) {
-                    show = false;
                     printf("Couldn't find any solutions\n");
-                }
-                else if (return_code == 3) {
-                    show = false;
-                    printf("Error: invalid input grid\n");
+                    free(grid);
                     return 4;
                 }
+            }
+            else {
+                printf("Error: invalid grid\n");
+                free(grid);
+                return 5;
             }
         }
         //invalid mode
@@ -85,8 +82,7 @@ int main(int argc, char *argv[]) {
         }
 
         //print output if a solution was found
-        if (show)
-            print_grid(grid, SUDOKU_SIZE);
+        print_grid(grid, SUDOKU_SIZE);
 
         free(grid);
         return 0;
@@ -95,7 +91,37 @@ int main(int argc, char *argv[]) {
 
     #ifdef UNITTEST     // run test code if testing
         printf("UNIT TESTING\n");
+        int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
 
+
+        /**************** Test functions in sudoku.c ****************/
+        ///////////// process_input /////////////
+        FILE *fp = fopen("testfiles/unittset_grid10", "r");
+        process_input(grid, SUDOKU_SIZE, stdin);
+        fclose(fp);
+
+        ///////////// print_grid /////////////
+
+
+        /**************** Test functions in check.h ****************/
+        ///////////// check_consistency /////////////
+
+        ///////////// check_valid /////////////
+
+
+        /**************** Test functions in util.h ****************/
+        ///////////// girid_copy /////////////
+
+
+        /**************** Test functions in creator.h ****************/
+        ///////////// creator /////////////
+
+
+        /**************** Test functions in solver.h ****************/
+        ///////////// solver /////////////
+
+
+        free(grid);
 
     #endif  // end of test
 }
@@ -107,12 +133,16 @@ int main(int argc, char *argv[]) {
  */
 
 
-bool process_input(int *grid, int size)
+bool process_input(int *grid, int size, FILE *fp)
 {
     for(int i=0; i<size; i++) {
-        if(fscanf(stdin, "%d", (grid+i)) != 1) {	
+        if(fscanf(fp, "%d", (grid+i)) != 1) {	
             return false;
         }
+    }
+    // check that grid is valid
+    if (!check_valid(grid)) { // grid inconsisent or contains invalid values
+        return false;
     }
     return true;
 }

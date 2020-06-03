@@ -31,10 +31,6 @@ int solve_helper(int *grid, int *soln, int size, int field);
  */
 int solver(int *grid, int size)
 {
-    if (!check_valid(grid)) { // inputted grid already inconsisent or contains invalid values, no solutions
-        return 3;
-    }
-
     //      creates a solutions array and sets the first number in the array to 0
     //              to signal that it does not yet contain a soltion
     int *soln = malloc(size * sizeof(int));

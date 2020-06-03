@@ -32,4 +32,4 @@
  */
 int solver(int *grid, int size);
 
-#endif
+#endif	// __SOLVER_H
