@@ -1,6 +1,6 @@
 # Makefile for 'common' module for C-SarSudoku
 # 
-# Blake Danziger, Tracey Mills, Tadeas Uhlir
+# Blake Danziger, Tracey Mills, Tadeáš Uhlíř
 # CS 50, Spring 2020
 
 OBJS = check.o utils.o

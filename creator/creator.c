@@ -1,5 +1,10 @@
-/*
- * creator - creates sudoku puzzles to be solved
+/*  creator.c file for C-SarSudoku
+ *
+ *  contains functions that are used to create sudoku puzzles
+ *  see creator.h for more info
+ *
+ *  Blake Danziger, Tracey Mills, Tadeáš Uhlíř
+ *  CS 50, Spring 2020
  */
 
 #include <stdio.h>

@@ -6,7 +6,7 @@
 
 testDir=testfiles
 
-echo "Testing sudoku module"
+echo "Integration Testing of sudoku module"
 echo ""
 #Error cases
 echo "These tests should fail:"
@@ -43,14 +43,18 @@ cat "$testDir"/grid6 | ./sudoku solve
 echo "Solving grid with more than one solution:"
 cat "$testDir"/grid7
 cat "$testDir"/grid7 | ./sudoku solve
+echo "Solving grid with unique solution:"
+cat "$testDir"/grid8
+cat "$testDir"/grid8 | ./sudoku solve
 echo "Fuzz testing with 10 randomly generated valid grids:"
 for i in {1..10}
 do
-	./sudoku create > grid8
+	./sudoku create > "$testDir"/grid9
 	echo "Unsolved grid:"
-	cat grid8
+	cat "$testDir"/grid9
 	echo "Solution:"
-	./sudoku solve < grid8
+	./sudoku solve < "$testDir"/grid9
 	echo ""
+	sleep 1
 done
 
