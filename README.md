@@ -37,27 +37,7 @@ enter `make clean` into the command line within the `querier/` directory to remo
 
 - 0: Ran correctly without errors
 - 1: Incorrect number of arguments
-- 2: Given first argument pageDirectory not a valid, readable directory or memory error in checking pageDirectory
-- 3: Given second argument indexFilename not a valid, readable regular file
-
-
-### Assumptions
-
-QUERIER
-
-The querier assumes that the input directory and files follow the designated formats.
-
-* `pageDirectory` has files named 1, 2, 3, ..., without gaps.
-* The content of files in `pageDirectory` follow the format as defined in the specs; thus your code (to read the files) need not have extensive error checking.
-* The content of the file named by `indexFilename` follows our the format as defined in the specs, being, most importantly for *querier*, that the URL is on line 1.
-
-Assume were running `querier` on a system that recognizes pathnames with double slashes `//`
-This way `queriuer` can be called with second parameter `pageDirectory` or `pageDirectory/`.
-This assumption is met on the cs.dartmouth.edu linux servers
-
-
-
-### Non-Assumptions
-
-The *querier* malloc's the size of the word array to the large enough to handle the maximum number of words in an input line[bdanziger@moose ~/cs50/group_project/C-sarsSudoku]$ 
-
+- 2: Unable to allocate memory for grid array
+- 3: Unexpected arg
+- 4: Solve mode, no solutions to given grid
+- 5: Solve mode, invalid user input
