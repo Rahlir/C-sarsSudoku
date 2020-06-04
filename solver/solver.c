@@ -38,6 +38,10 @@ int solver(int *grid, int size)
     //      creates a solutions array and sets the first number in the array to 0
     //              to signal that it does not yet contain a soltion
     int *soln = malloc(size * sizeof(int));
+    if (soln == NULL) {
+        printf("Error: memory error creating solution grid\n");
+        return 4;
+    }
     *soln = 0;
 
     if (solve_helper(grid, soln, size, 0) == 0) { // checked all numbers

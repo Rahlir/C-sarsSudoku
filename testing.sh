@@ -2,7 +2,7 @@
   
 # testing.sh - Testing file for sudoku module
 #
-# Blake Danziger, Tadeas Uhlir, Tracey Mills
+# Blake Danziger, Tadeáš Uhlíř, Tracey Mills
 
 testDir=testfiles
 
@@ -22,12 +22,9 @@ cat "$testDir"/error_grid1 | ./sudoku solve
 echo "Solving grid with non-int chars:"
 cat "$testDir"/error_grid2
 cat "$testDir"/error_grid2 | ./sudoku solve
-
-##### THIS ERROR NOT CORRECT: IT STARTS READING FROM STANDARD INPUT
 echo "Solving grid with out-of-range ints:"
 cat "$testDir"/error_grid3
 cat "$testDir"/error_grid3 | ./sudoku solve
-#####
 echo "Solving grid with no solution:"
 cat "$testDir"/error_grid4
 cat "$testDir"/error_grid4 | ./sudoku solve
