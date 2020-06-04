@@ -14,7 +14,8 @@ Spring 2020
  - 1 if incorrect arg number
  - 2 if unable to allocate memory for grid
  - 3 if arg is not "solve" or "create"
- - 4 if solve mode and invalid input from stdin
+ - 4 if solve mode and couldn't find any solutions to grid
+ - 5 if solve mode and invalid input from stdin
 
 ### Pseudocode
 
@@ -76,7 +77,8 @@ When `creator` is called:
  - 0 if found only one solution to the puzzle
  - 1 if more than one solution to the puzzle
  - 2 if found no solutions to the puzzle
- - 3 if invalid grid size
+ - 3 if grid passed to the solver is already invalid in some way
+ - 4 if error allocating memory for the grid
 
 ### Pseudocode
 
