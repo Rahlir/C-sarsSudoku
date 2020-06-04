@@ -102,9 +102,6 @@ int main(int argc, char *argv[]) {
     // print the test output to testing.out
 
         printf("UNIT TESTING\n");
-        int *grid;
-	grid = malloc(sizeof(int)*SUDOKU_SIZE);
-
     int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
     if(grid == NULL) {
         fprintf(stderr, "Error: unable to allocate memory for grid\n");

@@ -94,15 +94,7 @@ Lastly, a grid containing some non-integers is passed in, which should return fa
 We next check `check_consistency` by creating an integer array with all zeros except for 1-9 printed in order in the first 9 slots (corresponds to first row). it is then passed to `check_consistency` to check if it correctly checks the rows, columns, and squares by testing certain values in the same row, column, or square as another value. A valid and invalid value is tested for each.
 
 ### `check_valid`
-`check_consistency` checks the whole grid, so 
+`check_valid` checks the whole grid, so it is tested by creating integer arrays with out of range integers and then in-range integers. The function is run on both and should get false then true.
 
-
-### Fuzz Testing
-
-
-
-
-## Description of test code in `sudoku.c` run by `sudoku-test
-
-
-
+### `grid_copy`
+tested by creating two grids, one with values and one with all zeros. Then the values in the first grid are copied into the second, both grids should be the same when both are printed.
