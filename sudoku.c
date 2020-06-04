@@ -13,7 +13,6 @@
 #include "utils.h"
 
 static const int SUDOKU_SIZE = 81;
-static const char USAGE[] = "Usage: %s mode\n";
 
 void print_grid(int *grid, int size);
 bool process_input(int *grid, int size, FILE *fp);
@@ -26,7 +25,7 @@ int main(int argc, char *argv[]) {
         //check arg #
         if(argc != 2) {
             fprintf(stderr, "Error: provide one arg indicating mode\n");
-            fprintf(stderr, USAGE, argv[0]);
+            fprintf(stderr, "Usage: %s mode\n", argv[0]);
             return 1;
         }
 
@@ -98,7 +97,8 @@ int main(int argc, char *argv[]) {
         // print the test output to testing.out
 
         printf("UNIT TESTING\n");
-        int *grid = malloc(sizeof(int)*SUDOKU_SIZE);
+        int *grid;
+	grid = malloc(sizeof(int)*SUDOKU_SIZE);
 
 
         /**************** Test functions in sudoku.c ****************/
@@ -150,55 +150,83 @@ int main(int argc, char *argv[]) {
         /**************** Test functions in check.h ****************/
         ///////////// check_consistency /////////////
         printf("\n************** check_consistency **************\n");
-	int *test_grid;
-	test_grid = malloc(sizeof(int)*SUDOKU_SIZE);
+	grid = malloc(sizeof(int)*SUDOKU_SIZE);
 	for(int i=0; i<81; i++)
-		*(test_grid+i) = 0;
+		*(grid+i) = 0;
 	for(int i=0; i<9; i++)
-		*(test_grid+i) = i+1;
+		*(grid+i) = i+1;
 	
 	//check row
 	printf("Test on row with repeat ints: \nshould return false\n");
-	printf(check_consistency(test_grid, 0, 2) ? "true\n" : "false\n");
+	printf(check_consistency(grid, 0, 2) ? "true\n" : "false\n");
 	printf("Test on row with no repeat ints: \nshould return true\n");
-	printf(check_consistency(test_grid, 0, 1) ? "true\n" : "false\n");
+	printf(check_consistency(grid, 0, 1) ? "true\n" : "false\n");
 	printf("\n");
 
 	//check col
 	printf("Test on col with repeat ints: \nshould return false\n");
-        printf(check_consistency(test_grid, 9, 1) ? "true\n" : "false\n");
+        printf(check_consistency(grid, 9, 1) ? "true\n" : "false\n");
 	printf("Test on col with no repeat ints: \nshould return true\n");
-	printf(check_consistency(test_grid, 9, 5) ? "true\n" : "false\n");
+	printf(check_consistency(grid, 9, 5) ? "true\n" : "false\n");
 	printf("\n");
 
 	//check square
 	printf("Test on square with repeat ints: \nshould return false\n");
-        printf(check_consistency(test_grid, 9, 2) ? "true\n" : "false\n");
+        printf(check_consistency(grid, 9, 2) ? "true\n" : "false\n");
         printf("Test on square with no repeat ints: \nshould return true\n");
-	printf(check_consistency(test_grid, 9, 5) ? "true\n" : "false\n");
+	printf(check_consistency(grid, 9, 5) ? "true\n" : "false\n");
 	printf("\n");
 	
-	free(test_grid);
+	free(grid);
 
         ///////////// check_valid /////////////
         printf("\n************** check_valid **************\n");
+	grid = malloc(sizeof(int)*SUDOKU_SIZE);
+        for(int i=0; i<81; i++)
+                *(grid+i) = 0;
+	*(grid+7) = -3;
+	*(grid+25) = 100;
+	*(grid+59) = -2;
+	
+	//bad grid
+	printf("Test on grid with out of range values, should return false:\n");
+	print_grid(grid, 81);
+	printf(check_valid(grid) ? "true\n" : "false\n");
+	
+	*(grid+7) = 3;
+        *(grid+25) = 1;
+        *(grid+59) = 7;
 
+	//good grid
+        printf("Test on grid with in range values, should return true:\n");
+        print_grid(grid, 81);
+        printf(check_valid(grid) ? "true\n" : "false\n");
+
+	free(grid);
 
         /**************** Test functions in util.h ****************/
-        ///////////// girid_copy /////////////
+        ///////////// grid_copy /////////////
         printf("\n************** grid_copy **************\n");
+	grid = malloc(sizeof(int)*SUDOKU_SIZE);
+        for(int i=0; i<9; i++)
+		for(int j=0; j<9; j++)
+                	*(grid+(i*9)+j) = j+1;
+	
+	int *grid2 = malloc(sizeof(int)*SUDOKU_SIZE);
+	for(int i=0; i<81; i++)
+                *(grid2+i) = 0;
 
+	printf("Grid1:\n");
+	print_grid(grid, 81);
+	printf("Grid2:\n");
+        print_grid(grid2, 81);
+	printf("Copying Grid1 to Grid2...\n");
+	grid_copy(grid, grid2, 81);
+	printf("Updated grid2:\n");
+	print_grid(grid2, 81);
 
-        /**************** Test functions in creator.h ****************/
-        ///////////// creator /////////////
-        printf("\n************** creator **************\n");
-
-
-        /**************** Test functions in solver.h ****************/
-        ///////////// solver /////////////
-        printf("\n************** solver **************\n");
-
-
+	free(grid);
+	free(grid2);
 
     #endif  // end of test
 }
