@@ -8,6 +8,7 @@ Spring 2020
 ## sudoku
 C-sarSudoku is a program that can create a randomized sudoku grid with a unique solution. The program can also be passed an unsolved grid and finds a solution to the puzzle.
 
+[Project Video](https://drive.google.com/file/d/178il1pJMVwyYyZ94mtkB2QK1FmukBrLe/view?usp=sharing)
 
 ### Compilation
 
@@ -45,6 +46,6 @@ When inputting a grid into the solve mode, it is assumed that the grid is being 
 
 ### Non-Assumptions
 
-* Many of the functions assume that they are being poassed a grid with size 81, but the process_input function only reads in grids that are of size 81. It reads the first 81 if given more and returns an error if given fewer elements.
+* Many of the functions assume that they are being poassed a grid with size 81, but the `process_input` function only reads in grids that are of size 81. It reads the first 81 if given more and returns an error if given fewer elements.
 
 * There are checks in place that produce errors if non-integers are passed and the input is still read correctly if elements are separated by more than one whitespace character.
