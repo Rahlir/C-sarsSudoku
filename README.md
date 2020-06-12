@@ -8,7 +8,7 @@ Spring 2020
 ## sudoku
 C-sarSudoku is a program that can create a randomized sudoku grid with a unique solution. The program can also be passed an unsolved grid and finds a solution to the puzzle.
 
-[Project Video](https://drive.google.com/file/d/178il1pJMVwyYyZ94mtkB2QK1FmukBrLe/view?usp=sharing)
+[Project Video](https://drive.google.com/file/d/1H_i5g8LM_UsR19JCA9tspjp3mIrLFRri/view?usp=sharing)
 
 ### Compilation
 
